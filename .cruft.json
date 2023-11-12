@@ -1,0 +1,27 @@
+{
+  "template": "https://github.com/linkml/linkml-project-cookiecutter",
+  "commit": "8b72e3376b76e05aaa72cbf3f8d8393cf185e9d4",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "datalad-schema",
+      "__project_slug": "datalad_schema",
+      "github_org": "psychoinformatics-de",
+      "__source_path": "src/datalad_schema/schema/datalad_schema.yaml",
+      "project_description": "DataLad dataset schema",
+      "full_name": "Stephan Heunis",
+      "email": "jsheunis@gmail.com",
+      "__author": "Stephan Heunis <jsheunis@gmail.com>",
+      "license": "MIT",
+      "main_schema_class": "Dataset",
+      "create_python_classes": "Yes",
+      "use_schemasheets": "No",
+      "google_sheet_id": "1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ",
+      "google_sheet_tabs": "personinfo enums",
+      "__google_sheet_module": "personinfo_enums",
+      "github_token_for_pypi_deployment": "PYPI_PASSWORD",
+      "_template": "https://github.com/linkml/linkml-project-cookiecutter"
+    }
+  },
+  "directory": null
+}
