@@ -1,23 +1,38 @@
-// Represents a Dataset
 message Dataset
  {
-  uriorcurie id = 0
+  string identifier = 0
   string name = 0
   string description = 0
-  string primaryEmail = 0
-  date birthDate = 0
-  integer ageInYears = 0
-  personStatus vitalStatus = 0
+ repeated  person authors = 0
+ repeated  file hasPart = 0
+  string homepage = 0
+ repeated  string keywords = 0
+  string last-updated = 0
+  string license = 0
+  string title = 0
+  string version = 0
  }
 // A holder for Dataset objects
 message DatasetCollection
  {
  repeated  dataset entries = 0
  }
+message File
+ {
+  string checksumMd5 = 0
+  string pathPosix = 0
+  integer sizeInBytes = 0
+  string url = 0
+ }
 // A generic grouping for any identifiable entity
 message NamedThing
  {
-  uriorcurie id = 0
+  string identifier = 0
   string name = 0
   string description = 0
+ }
+message Person
+ {
+  string email = 0
+  string name = 0
  }

@@ -1,5 +1,6 @@
-@prefix PATO: <http://purl.obolibrary.org/obo/PATO_> .
+@prefix afo: <http://purl.allotrope.org/ontologies/result#> .
 @prefix datalad_schema: <https://w3id.org/psychoinformatics-de/datalad-schema/> .
+@prefix obo: <https://purl.obolibrary.org/obo/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -9,11 +10,7 @@ schema:Thing a sh:NodeShape ;
     sh:closed true ;
     sh:description "A generic grouping for any identifiable entity" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path schema:identifier ],
-        [ sh:datatype xsd:string ;
+    sh:property [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:order 1 ;
@@ -22,58 +19,109 @@ schema:Thing a sh:NodeShape ;
             sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 2 ;
-            sh:path schema:description ] ;
+            sh:path schema:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path schema:identifier ] ;
     sh:targetClass schema:Thing .
 
 datalad_schema:DatasetCollection a sh:NodeShape ;
     sh:closed true ;
     sh:description "A holder for Dataset objects" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class datalad_schema:Dataset ;
+    sh:property [ sh:class schema:Dataset ;
             sh:nodeKind sh:IRI ;
             sh:order 0 ;
             sh:path datalad_schema:entries ] ;
     sh:targetClass datalad_schema:DatasetCollection .
 
-datalad_schema:Dataset a sh:NodeShape ;
+schema:Dataset a sh:NodeShape ;
     sh:closed true ;
-    sh:description "Represents a Dataset" ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
+            sh:order 3 ;
+            sh:path schema:keywords ],
+        [ sh:datatype xsd:string ;
+            sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 8 ;
+            sh:path schema:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema:version ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path schema:dateModified ],
+        [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
-            sh:order 6 ;
+            sh:order 10 ;
             sh:path schema:description ],
+        [ sh:class schema:DigitalDocument ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path schema:hasPart ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
-            sh:order 5 ;
+            sh:order 9 ;
             sh:path schema:name ],
-        [ sh:datatype xsd:integer ;
-            sh:description "Number of years since birth" ;
+        [ sh:class schema:Person ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path schema:author ],
+        [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path datalad_schema:age_in_years ],
-        [ sh:description "living or dead status" ;
-            sh:in ( PATO:0001421 PATO:0001422 "UNKNOWN" ) ;
+            sh:order 7 ;
+            sh:path schema:version ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema:license ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema:title ] ;
+    sh:targetClass schema:Dataset .
+
+schema:DigitalDocument a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:order 3 ;
-            sh:path datalad_schema:vital_status ],
+            sh:path schema:contentUrl ],
         [ sh:datatype xsd:string ;
-            sh:description "The main email address of a person" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path obo:NCIT_C171276 ],
+        [ sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema:contentSize ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path afo:AFR_0001928 ] ;
+    sh:targetClass schema:DigitalDocument .
+
+schema:Person a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:order 0 ;
             sh:path schema:email ;
             sh:pattern "^\\S+@[\\S+\\.]+\\S+" ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path schema:identifier ],
-        [ sh:datatype xsd:date ;
-            sh:description "Date on which a person is born" ;
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path schema:birthDate ] ;
-    sh:targetClass datalad_schema:Dataset .
+            sh:path schema:name ] ;
+    sh:targetClass schema:Person .
 

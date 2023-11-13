@@ -2,41 +2,56 @@
     "$defs": {
         "Dataset": {
             "additionalProperties": false,
-            "description": "Represents a Dataset",
+            "description": "",
             "properties": {
-                "age_in_years": {
-                    "description": "Number of years since birth",
-                    "type": "integer"
-                },
-                "birth_date": {
-                    "description": "Date on which a person is born",
-                    "format": "date",
-                    "type": "string"
+                "authors": {
+                    "items": {
+                        "$ref": "#/$defs/Person"
+                    },
+                    "type": "array"
                 },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
                 },
-                "id": {
+                "hasPart": {
+                    "items": {
+                        "$ref": "#/$defs/File"
+                    },
+                    "type": "array"
+                },
+                "homepage": {
+                    "type": "string"
+                },
+                "identifier": {
                     "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "keywords": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "last_updated": {
+                    "type": "string"
+                },
+                "license": {
                     "type": "string"
                 },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
                 },
-                "primary_email": {
-                    "description": "The main email address of a person",
-                    "pattern": "^\\S+@[\\S+\\.]+\\S+",
+                "title": {
                     "type": "string"
                 },
-                "vital_status": {
-                    "$ref": "#/$defs/PersonStatus",
-                    "description": "living or dead status"
+                "version": {
+                    "type": "string"
                 }
             },
             "required": [
-                "id"
+                "identifier"
             ],
             "title": "Dataset",
             "type": "object"
@@ -64,41 +79,76 @@
         },
         "Dataset__identifier_optional": {
             "additionalProperties": false,
-            "description": "Represents a Dataset",
+            "description": "",
             "properties": {
-                "age_in_years": {
-                    "description": "Number of years since birth",
-                    "type": "integer"
-                },
-                "birth_date": {
-                    "description": "Date on which a person is born",
-                    "format": "date",
-                    "type": "string"
+                "authors": {
+                    "items": {
+                        "$ref": "#/$defs/Person"
+                    },
+                    "type": "array"
                 },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
                 },
-                "id": {
+                "hasPart": {
+                    "items": {
+                        "$ref": "#/$defs/File"
+                    },
+                    "type": "array"
+                },
+                "homepage": {
+                    "type": "string"
+                },
+                "identifier": {
                     "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "keywords": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "last_updated": {
+                    "type": "string"
+                },
+                "license": {
                     "type": "string"
                 },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
                 },
-                "primary_email": {
-                    "description": "The main email address of a person",
-                    "pattern": "^\\S+@[\\S+\\.]+\\S+",
+                "title": {
                     "type": "string"
                 },
-                "vital_status": {
-                    "$ref": "#/$defs/PersonStatus",
-                    "description": "living or dead status"
+                "version": {
+                    "type": "string"
                 }
             },
             "required": [],
             "title": "Dataset",
+            "type": "object"
+        },
+        "File": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "checksum_md5": {
+                    "type": "string"
+                },
+                "path_posix": {
+                    "type": "string"
+                },
+                "size_in_bytes": {
+                    "type": "integer"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "title": "File",
             "type": "object"
         },
         "NamedThing": {
@@ -109,7 +159,7 @@
                     "description": "A human-readable description for a thing",
                     "type": "string"
                 },
-                "id": {
+                "identifier": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
@@ -119,20 +169,26 @@
                 }
             },
             "required": [
-                "id"
+                "identifier"
             ],
             "title": "NamedThing",
             "type": "object"
         },
-        "PersonStatus": {
+        "Person": {
+            "additionalProperties": false,
             "description": "",
-            "enum": [
-                "ALIVE",
-                "DEAD",
-                "UNKNOWN"
-            ],
-            "title": "PersonStatus",
-            "type": "string"
+            "properties": {
+                "email": {
+                    "pattern": "^\\S+@[\\S+\\.]+\\S+",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                }
+            },
+            "title": "Person",
+            "type": "object"
         }
     },
     "$id": "https://w3id.org/psychoinformatics-de/datalad-schema",

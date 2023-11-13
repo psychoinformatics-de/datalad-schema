@@ -7,44 +7,61 @@ description: |-
 license: MIT
 see_also:
   - https://psychoinformatics-de.github.io/datalad-schema
-
 prefixes:
+  afo: http://purl.allotrope.org/ontologies/result#
   datalad_schema: https://w3id.org/psychoinformatics-de/datalad-schema/
   linkml: https://w3id.org/linkml/
-  biolink: https://w3id.org/biolink/
+  obo: https://purl.obolibrary.org/obo/
+  ORCID: https://orcid.org/
   schema: http://schema.org/
-  PATO: http://purl.obolibrary.org/obo/PATO_
-  example: https://example.org/
+  spdx: https://spdx.org/licenses/
 default_prefix: datalad_schema
 default_range: string
 
+
+# imports
 imports:
   - linkml:types
 
-classes:
 
+# classes are the main organization until for data;
+# all data records instantiate a class
+classes:
   NamedThing:
     description: >-
       A generic grouping for any identifiable entity
     slots:
-      - id
+      - identifier
       - name
       - description
     class_uri: schema:Thing
-
   Dataset:
     is_a: NamedThing
-    description: >-
-      Represents a Dataset
+    class_uri: schema:Dataset
+    slots:   ## specified as a list
+      - authors
+      - hasPart
+      - homepage
+      - keywords
+      - last-updated
+      - license
+      - title
+      - version
+  File:
+    class_uri: schema:DigitalDocument
+    slots:   ## specified as a list
+      - checksum_md5
+      - path_posix
+      - size_in_bytes
+      - url
+  Person:
+    class_uri: schema:Person
     slots:
-      - primary_email
-      - birth_date
-      - age_in_years
-      - vital_status
+      - email
+      - name
     slot_usage:
-      primary_email:
+      email:
         pattern: "^\\S+@[\\S+\\.]+\\S+"
-
   DatasetCollection:
     tree_root: true
     description: >-
@@ -55,42 +72,61 @@ classes:
         multivalued: true
         inlined: true
 
+
+# slots are first-class entities in the metamodel
+# declaring them here allows them to be reused elsewhere
 slots:
-  id:
-    identifier: true
-    slot_uri: schema:identifier
-    range: uriorcurie
-    description: A unique identifier for a thing
-  name:
-    slot_uri: schema:name
-    description: A human-readable name for a thing
+  authors:
+    slot_uri: schema:author
+    multivalued: true
+    inlined_as_list: true
+    range: Person
+  checksum_md5:
+    slot_uri: obo:NCIT_C171276
   description:
     slot_uri: schema:description
     description: A human-readable description for a thing
-  primary_email:
+  email:
     slot_uri: schema:email
-    description: The main email address of a person
-  birth_date:
-    slot_uri: schema:birthDate
-    range: date
-    description: Date on which a person is born
-  age_in_years:
+  hasPart:
+    slot_uri: schema:hasPart
+    multivalued: true
+    inlined_as_list: true
+    range: File
+  homepage:
+    slot_uri: schema:version
+  identifier:
+    identifier: true
+    slot_uri: schema:identifier
+    description: A unique identifier for a thing
+  keywords:
+    slot_uri: schema:keywords
+    multivalued: true
+    inlined_as_list: true
+  last-updated:
+    slot_uri: schema:dateModified
+  license:
+    slot_uri: schema:license
+    # range: LicenseEnum
+  name:
+    slot_uri: schema:name
+    description: A human-readable name for a thing
+  path_posix:
+    slot_uri: afo:AFR_0001928
+  size_in_bytes:
+    slot_uri: schema:contentSize
     range: integer
-    description: Number of years since birth
-  vital_status:
-    range: PersonStatus
-    description: living or dead status
+    unit:
+      ucum_code: byte
+  title:
+    slot_uri: schema:title
+  url:
+    slot_uri: schema:contentUrl
+  version:
+    slot_uri: schema:version
 
-enums:
-  PersonStatus:
-    permissible_values:
-      ALIVE:
-        description: the person is living
-        meaning: PATO:0001421
-      DEAD:
-        description: the person is deceased
-        meaning: PATO:0001422
-      UNKNOWN:
-        description: the vital status is not known
-        todos:
-          - map this to an ontology
+
+# enumerations
+# enums:
+#   LicenseEnum:
+#     source_ontology: spdx

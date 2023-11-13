@@ -1,11 +1,21 @@
 {
-   "PATO": "http://purl.obolibrary.org/obo/PATO_",
-   "biolink": "https://w3id.org/biolink/",
+   "ORCID": "https://orcid.org/",
+   "afo": "http://purl.allotrope.org/ontologies/result#",
    "datalad_schema": "https://w3id.org/psychoinformatics-de/datalad-schema/",
-   "example": "https://example.org/",
    "linkml": "https://w3id.org/linkml/",
+   "obo": "https://purl.obolibrary.org/obo/",
    "schema": "http://schema.org/",
+   "spdx": "https://spdx.org/licenses/",
+   "Dataset": {
+      "@id": "schema:Dataset"
+   },
+   "File": {
+      "@id": "schema:DigitalDocument"
+   },
    "NamedThing": {
       "@id": "schema:Thing"
+   },
+   "Person": {
+      "@id": "schema:Person"
    }
 }
