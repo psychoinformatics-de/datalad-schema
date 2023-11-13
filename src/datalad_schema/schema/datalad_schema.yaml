@@ -107,7 +107,7 @@ slots:
     slot_uri: schema:dateModified
   license:
     slot_uri: schema:license
-    range: LicenseEnum
+    # range: LicenseEnum
   name:
     slot_uri: schema:name
     description: A human-readable name for a thing
@@ -127,6 +127,6 @@ slots:
 
 
 # enumerations
-enums:
-  LicenseEnum:
-    source_ontology: spdx
+# enums:
+#   LicenseEnum:
+#     source_ontology: spdx
