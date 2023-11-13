@@ -5,9 +5,9 @@
 
 # datalad-schema
 
-[![deploy-docs](https://github.com/psychoinformatics-de/datalad-schema/workflows/deploy-docs/badge.svg)](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/deploy-docs.yaml)
-[![main](https://github.com/psychoinformatics-de/datalad-schema/workflows/main/badge.svg)](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/main.yaml)
-[![pypi-publish](https://github.com/psychoinformatics-de/datalad-schema/workflows/pypi-publish/badge.svg)](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/pypi-publish.yaml)
+[![deploy-docs](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/deploy-docs.yaml/badge.svg)](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/deploy-docs.yaml)
+[![main](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/main.yaml/badge.svg)](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/main.yaml)
+[![pypi-publish](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/pypi-publish.yaml/badge.svg)](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/pypi-publish.yaml)
 
 DataLad dataset schema
 
