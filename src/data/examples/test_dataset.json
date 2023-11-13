@@ -1,0 +1,44 @@
+{
+    "authors": [
+        {
+            "name": "Stephan Heunis",
+            "email": "jsh@example.com"
+        },
+        {
+            "name": "Stephan Heunis 2",
+            "email": "jsh2@example.com"
+        }
+    ],
+    "description": "This is my awesome dataset",
+    "hasPart": [
+        {
+            "checksum_md5": "qw4rtt32423",
+            "path_posix": "readme.md",
+            "size_in_bytes": 3456
+        },
+        {
+            "checksum_md5": "8uijshabc9288129",
+            "path_posix": "anotherfile.txt",
+            "size_in_bytes": 345566
+        },
+        {
+            "checksum_md5": "234567iuyhgbcv",
+            "path_posix": "code/script.py",
+            "size_in_bytes": 5464564
+        },{
+            "checksum_md5": "qw4rtt32423",
+            "path_posix": "input/data.csv",
+            "size_in_bytes": 9999
+        }
+    ],
+    "identifier": "mydataset1234",
+    "keywords": [
+        "data",
+        "awseome",
+        "share"
+    ],
+    "license": "klhjgvk l;jknhjlh ;kjnhb CC0",
+    "name": "my_data",
+    "title": "my_data",
+    "version": "9876543210"
+}
