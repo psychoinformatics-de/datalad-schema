@@ -1,4 +1,13 @@
+
+### *[UNDER DEVELOPMENT: this repository should not be considered stable for production use]*
+---
+
+
 # datalad-schema
+
+[![deploy-docs](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/deploy-docs.yaml/badge.svg)](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/deploy-docs.yaml)
+[![main](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/main.yaml/badge.svg)](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/main.yaml)
+[![pypi-publish](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/pypi-publish.yaml/badge.svg)](https://github.com/psychoinformatics-de/datalad-schema/actions/workflows/pypi-publish.yaml)
 
 DataLad dataset schema
 
