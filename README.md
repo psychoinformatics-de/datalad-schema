@@ -1,3 +1,8 @@
+
+### *[UNDER DEVELOPMENT: this repository should not be considered stable for production use]*
+---
+
+
 # datalad-schema
 
 DataLad dataset schema
