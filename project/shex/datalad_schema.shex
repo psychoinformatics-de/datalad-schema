@@ -1,7 +1,9 @@
 BASE <https://w3id.org/psychoinformatics-de/datalad-schema/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX afo: <http://purl.allotrope.org/ontologies/result#>
 PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX obo: <https://purl.obolibrary.org/obo/>
 PREFIX schema: <http://schema.org/>
 
 
@@ -46,18 +48,32 @@ linkml:Sparqlpath xsd:string
 <Dataset> CLOSED {
     (  $<Dataset_tes> (  &<NamedThing_tes> ;
           rdf:type [ schema:Thing ] ? ;
-          schema:email @linkml:String ? ;
-          schema:birthDate @linkml:Date ? ;
-          <age_in_years> @linkml:Integer ? ;
-          <vital_status> @<PersonStatus> ?
+          schema:author @<Person> * ;
+          schema:hasPart @<File> * ;
+          schema:version @linkml:String ? ;
+          schema:keywords @linkml:String * ;
+          schema:dateModified @linkml:String ? ;
+          schema:license @linkml:String ? ;
+          schema:title @linkml:String ? ;
+          schema:version @linkml:String ?
        ) ;
-       rdf:type [ <Dataset> ]
+       rdf:type [ schema:Dataset ]
     )
 }
 
 <DatasetCollection> CLOSED {
     (  $<DatasetCollection_tes> <entries> @<Dataset> * ;
        rdf:type [ <DatasetCollection> ] ?
+    )
+}
+
+<File> CLOSED {
+    (  $<File_tes> (  obo:NCIT_C171276 @linkml:String ? ;
+          afo:AFR_0001928 @linkml:String ? ;
+          schema:contentSize @linkml:Integer ? ;
+          schema:contentUrl @linkml:String ?
+       ) ;
+       rdf:type [ schema:DigitalDocument ] ?
     )
 }
 
@@ -70,5 +86,13 @@ linkml:Sparqlpath xsd:string
        )
     } OR @<Dataset>
 )
+
+<Person> CLOSED {
+    (  $<Person_tes> (  schema:email @linkml:String ? ;
+          schema:name @linkml:String ?
+       ) ;
+       rdf:type [ schema:Person ] ?
+    )
+}
 
 

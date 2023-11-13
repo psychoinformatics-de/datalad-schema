@@ -1,12 +1,16 @@
 type Dataset
   {
-    id: Uriorcurie!
+    identifier: String!
     name: String
     description: String
-    primaryEmail: String
-    birthDate: Date
-    ageInYears: Integer
-    vitalStatus: PersonStatus
+    authors: [Person]
+    hasPart: [File]
+    homepage: String
+    keywords: [String]
+    last-updated: String
+    license: String
+    title: String
+    version: String
   }
 
 type DatasetCollection
@@ -14,10 +18,24 @@ type DatasetCollection
     entries: [Dataset]
   }
 
+type File
+  {
+    checksumMd5: String
+    pathPosix: String
+    sizeInBytes: Integer
+    url: String
+  }
+
 type NamedThing
   {
-    id: Uriorcurie!
+    identifier: String!
     name: String
     description: String
+  }
+
+type Person
+  {
+    email: String
+    name: String
   }
 

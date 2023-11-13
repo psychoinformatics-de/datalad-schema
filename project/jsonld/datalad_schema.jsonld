@@ -12,6 +12,10 @@
   "license": "MIT",
   "prefixes": [
     {
+      "prefix_prefix": "afo",
+      "prefix_reference": "http://purl.allotrope.org/ontologies/result#"
+    },
+    {
       "prefix_prefix": "datalad_schema",
       "prefix_reference": "https://w3id.org/psychoinformatics-de/datalad-schema/"
     },
@@ -20,20 +24,20 @@
       "prefix_reference": "https://w3id.org/linkml/"
     },
     {
-      "prefix_prefix": "biolink",
-      "prefix_reference": "https://w3id.org/biolink/"
+      "prefix_prefix": "obo",
+      "prefix_reference": "https://purl.obolibrary.org/obo/"
+    },
+    {
+      "prefix_prefix": "ORCID",
+      "prefix_reference": "https://orcid.org/"
     },
     {
       "prefix_prefix": "schema",
       "prefix_reference": "http://schema.org/"
     },
     {
-      "prefix_prefix": "PATO",
-      "prefix_reference": "http://purl.obolibrary.org/obo/PATO_"
-    },
-    {
-      "prefix_prefix": "example",
-      "prefix_reference": "https://example.org/"
+      "prefix_prefix": "spdx",
+      "prefix_reference": "https://spdx.org/licenses/"
     }
   ],
   "default_prefix": "datalad_schema",
@@ -348,63 +352,36 @@
       "@type": "TypeDefinition"
     }
   ],
-  "enums": [
-    {
-      "name": "PersonStatus",
-      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/PersonStatus",
-      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
-      "permissible_values": [
-        {
-          "text": "ALIVE",
-          "description": "the person is living",
-          "meaning": "PATO:0001421"
-        },
-        {
-          "text": "DEAD",
-          "description": "the person is deceased",
-          "meaning": "PATO:0001422"
-        },
-        {
-          "text": "UNKNOWN",
-          "description": "the vital status is not known",
-          "todos": [
-            "map this to an ontology"
-          ]
-        }
-      ]
-    }
-  ],
   "slots": [
     {
-      "name": "id",
-      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/id",
-      "description": "A unique identifier for a thing",
+      "name": "authors",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/authors",
       "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
       "mappings": [
-        "http://schema.org/identifier"
+        "http://schema.org/author"
       ],
-      "slot_uri": "http://schema.org/identifier",
-      "identifier": true,
-      "owner": "NamedThing",
+      "slot_uri": "http://schema.org/author",
+      "multivalued": true,
+      "owner": "Dataset",
       "domain_of": [
-        "NamedThing"
+        "Dataset"
       ],
-      "range": "uriorcurie",
-      "required": true,
+      "range": "Person",
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "name",
-      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/name",
-      "description": "A human-readable name for a thing",
+      "name": "checksum_md5",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/checksum_md5",
       "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
       "mappings": [
-        "http://schema.org/name"
+        "https://purl.obolibrary.org/obo/NCIT_C171276"
       ],
-      "slot_uri": "http://schema.org/name",
-      "owner": "NamedThing",
+      "slot_uri": "https://purl.obolibrary.org/obo/NCIT_C171276",
+      "owner": "File",
       "domain_of": [
-        "NamedThing"
+        "File"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -426,14 +403,46 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "primary_email",
-      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/primary_email",
-      "description": "The main email address of a person",
+      "name": "email",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/email",
       "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
       "mappings": [
         "http://schema.org/email"
       ],
       "slot_uri": "http://schema.org/email",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "hasPart",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/hasPart",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "http://schema.org/hasPart"
+      ],
+      "slot_uri": "http://schema.org/hasPart",
+      "multivalued": true,
+      "owner": "Dataset",
+      "domain_of": [
+        "Dataset"
+      ],
+      "range": "File",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "homepage",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/homepage",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "http://schema.org/version"
+      ],
+      "slot_uri": "http://schema.org/version",
       "owner": "Dataset",
       "domain_of": [
         "Dataset"
@@ -442,45 +451,164 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "birth_date",
-      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/birth_date",
-      "description": "Date on which a person is born",
+      "name": "identifier",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/identifier",
+      "description": "A unique identifier for a thing",
       "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
       "mappings": [
-        "http://schema.org/birthDate"
+        "http://schema.org/identifier"
       ],
-      "slot_uri": "http://schema.org/birthDate",
-      "owner": "Dataset",
+      "slot_uri": "http://schema.org/identifier",
+      "identifier": true,
+      "owner": "NamedThing",
       "domain_of": [
-        "Dataset"
+        "NamedThing"
       ],
-      "range": "date",
+      "range": "string",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "age_in_years",
-      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/age_in_years",
-      "description": "Number of years since birth",
+      "name": "keywords",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/keywords",
       "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
-      "slot_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/age_in_years",
+      "mappings": [
+        "http://schema.org/keywords"
+      ],
+      "slot_uri": "http://schema.org/keywords",
+      "multivalued": true,
       "owner": "Dataset",
       "domain_of": [
         "Dataset"
+      ],
+      "range": "string",
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "last_updated",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/last_updated",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "http://schema.org/dateModified"
+      ],
+      "slot_uri": "http://schema.org/dateModified",
+      "owner": "Dataset",
+      "domain_of": [
+        "Dataset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "license",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/license",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "http://schema.org/license"
+      ],
+      "slot_uri": "http://schema.org/license",
+      "owner": "Dataset",
+      "domain_of": [
+        "Dataset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "name",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/name",
+      "description": "A human-readable name for a thing",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "http://schema.org/name"
+      ],
+      "slot_uri": "http://schema.org/name",
+      "owner": "Person",
+      "domain_of": [
+        "NamedThing",
+        "Person"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "path_posix",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/path_posix",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "http://purl.allotrope.org/ontologies/result#AFR_0001928"
+      ],
+      "slot_uri": "http://purl.allotrope.org/ontologies/result#AFR_0001928",
+      "owner": "File",
+      "domain_of": [
+        "File"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "size_in_bytes",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/size_in_bytes",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "http://schema.org/contentSize"
+      ],
+      "slot_uri": "http://schema.org/contentSize",
+      "owner": "File",
+      "domain_of": [
+        "File"
       ],
       "range": "integer",
+      "unit": {
+        "ucum_code": "byte",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
-      "name": "vital_status",
-      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/vital_status",
-      "description": "living or dead status",
+      "name": "title",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/title",
       "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
-      "slot_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/vital_status",
+      "mappings": [
+        "http://schema.org/title"
+      ],
+      "slot_uri": "http://schema.org/title",
       "owner": "Dataset",
       "domain_of": [
         "Dataset"
       ],
-      "range": "PersonStatus",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "url",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/url",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "http://schema.org/contentUrl"
+      ],
+      "slot_uri": "http://schema.org/contentUrl",
+      "owner": "File",
+      "domain_of": [
+        "File"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "version",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/version",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "http://schema.org/version"
+      ],
+      "slot_uri": "http://schema.org/version",
+      "owner": "Dataset",
+      "domain_of": [
+        "Dataset"
+      ],
+      "range": "string",
       "@type": "SlotDefinition"
     },
     {
@@ -498,23 +626,22 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "Dataset_primary_email",
-      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/primary_email",
-      "description": "The main email address of a person",
+      "name": "Person_email",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/email",
       "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
       "mappings": [
         "http://schema.org/email"
       ],
-      "is_a": "primary_email",
-      "domain": "Dataset",
+      "is_a": "email",
+      "domain": "Person",
       "slot_uri": "http://schema.org/email",
-      "alias": "primary_email",
-      "owner": "Dataset",
+      "alias": "email",
+      "owner": "Person",
       "domain_of": [
-        "Dataset"
+        "Person"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "primary_email",
+      "usage_slot_name": "email",
       "range": "string",
       "pattern": "^\\S+@[\\S+\\.]+\\S+",
       "@type": "SlotDefinition"
@@ -530,7 +657,7 @@
         "schema:Thing"
       ],
       "slots": [
-        "id",
+        "identifier",
         "name",
         "description"
       ],
@@ -541,20 +668,58 @@
     {
       "name": "Dataset",
       "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/Dataset",
-      "description": "Represents a Dataset",
       "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "schema:Dataset"
+      ],
       "is_a": "NamedThing",
       "slots": [
-        "id",
+        "identifier",
         "name",
         "description",
-        "Dataset_primary_email",
-        "birth_date",
-        "age_in_years",
-        "vital_status"
+        "authors",
+        "hasPart",
+        "homepage",
+        "keywords",
+        "last_updated",
+        "license",
+        "title",
+        "version"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/Dataset",
+      "class_uri": "http://schema.org/Dataset",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "File",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/File",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "schema:DigitalDocument"
+      ],
+      "slots": [
+        "checksum_md5",
+        "path_posix",
+        "size_in_bytes",
+        "url"
+      ],
+      "slot_usage": {},
+      "class_uri": "http://schema.org/DigitalDocument",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Person",
+      "definition_uri": "https://w3id.org/psychoinformatics-de/datalad-schema/Person",
+      "from_schema": "https://w3id.org/psychoinformatics-de/datalad-schema",
+      "mappings": [
+        "schema:Person"
+      ],
+      "slots": [
+        "Person_email",
+        "name"
+      ],
+      "slot_usage": {},
+      "class_uri": "http://schema.org/Person",
       "@type": "ClassDefinition"
     },
     {
@@ -582,9 +747,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "datalad_schema.yaml",
-  "source_file_date": "2023-11-13T11:11:27",
-  "source_file_size": 2227,
-  "generation_date": "2023-11-13T11:12:26",
+  "source_file_date": "2023-11-13T11:30:36",
+  "source_file_size": 2921,
+  "generation_date": "2023-11-13T11:44:08",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/datalad_schema.context.jsonld",
