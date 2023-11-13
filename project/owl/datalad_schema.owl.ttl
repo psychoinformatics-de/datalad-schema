@@ -5,7 +5,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema1: <http://schema.org/> .
+@prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -25,10 +25,28 @@ datalad_schema:Dataset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Dataset" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty datalad_schema:birth_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty datalad_schema:age_in_years ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty datalad_schema:birth_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty datalad_schema:primary_email ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty datalad_schema:vital_status ],
+        [ a owl:Restriction ;
             owl:allValuesFrom datalad_schema:PersonStatus ;
             owl:onProperty datalad_schema:vital_status ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty datalad_schema:primary_email ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Date ;
             owl:onProperty datalad_schema:birth_date ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
@@ -37,31 +55,13 @@ datalad_schema:Dataset a owl:Class,
             owl:allValuesFrom linkml:Integer ;
             owl:onProperty datalad_schema:age_in_years ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty datalad_schema:primary_email ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty datalad_schema:age_in_years ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty datalad_schema:birth_date ],
-        [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
                     owl:withRestrictions ( [ xsd:pattern "^\\S+@[\\S+\\.]+\\S+" ] ) ] ;
             owl:onProperty datalad_schema:primary_email ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Date ;
-            owl:onProperty datalad_schema:birth_date ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty datalad_schema:age_in_years ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty datalad_schema:primary_email ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty datalad_schema:vital_status ],
         datalad_schema:NamedThing ;
     skos:definition "Represents a Dataset" ;
     skos:inScheme <https://w3id.org/psychoinformatics-de/datalad-schema> .
@@ -70,34 +70,34 @@ datalad_schema:NamedThing a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "NamedThing" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty datalad_schema:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty datalad_schema:description ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty datalad_schema:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty datalad_schema:description ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty datalad_schema:description ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty datalad_schema:name ],
+            owl:maxCardinality 1 ;
+            owl:onProperty datalad_schema:description ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty datalad_schema:id ],
         [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty datalad_schema:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty datalad_schema:id ],
+        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty datalad_schema:name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty datalad_schema:name ] ;
+            owl:onProperty datalad_schema:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty datalad_schema:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty datalad_schema:description ] ;
     skos:definition "A generic grouping for any identifiable entity" ;
-    skos:exactMatch schema1:Thing ;
+    skos:exactMatch schema:Thing ;
     skos:inScheme <https://w3id.org/psychoinformatics-de/datalad-schema> .
 
 PATO:0001421 a owl:Class,

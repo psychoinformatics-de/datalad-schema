@@ -582,9 +582,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "datalad_schema.yaml",
-  "source_file_date": "2023-11-12T16:07:49",
+  "source_file_date": "2023-11-13T11:11:27",
   "source_file_size": 2227,
-  "generation_date": "2023-11-12T16:13:33",
+  "generation_date": "2023-11-13T11:12:26",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/datalad_schema.context.jsonld",
