@@ -1,5 +1,5 @@
 
-### *[UNDER DEVELOPMENT: this repository should not be considered stable for production use]*
+### *[THIS PROJECT HAS BEEN ABANDONED AND IS REPLACED BY https://github.com/psychoinformatics-de/datalad-concepts/]*
 ---
 
 
